@@ -1,0 +1,393 @@
+root=true
+# ^ specifies that this is the top-most EditorConfig file (stop probing in parent folders), MUST be first line of file
+
+# SEE ALSO https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
+
+###############################
+# Core EditorConfig Options   #
+###############################
+
+# Don't use tabs for indentation.
+[*]
+indent_style=space
+charset=utf-8
+trim_trailing_whitespace=true
+insert_final_newline=true
+max_line_length=150
+end_of_line=crlf
+
+# Microsoft .NET properties
+csharp_preserve_single_line_blocks=true
+
+# (Please don't specify an indent_size here; that has too many unintended consequences.)
+
+[*.md]
+trim_trailing_whitespace=false
+
+# Code files
+[*.{cs,csx,vb,vbx}]
+indent_size=4
+
+# Xml project files
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+indent_size=2
+
+# Xml config files
+[*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
+indent_size=2
+
+# template config files
+[*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}.{templ,template}]
+indent_size=2
+
+# JSON files
+[*.json]
+indent_size=2
+
+###############################
+# .NET Coding Conventions     #
+###############################
+[*.{cs,vb}]
+# Organize usings
+dotnet_sort_system_directives_first=true
+dotnet_separate_import_directive_groups=false
+
+# this. preferences
+dotnet_style_qualification_for_field=false:suggestion
+dotnet_style_qualification_for_property=false:suggestion
+dotnet_style_qualification_for_method=false:suggestion
+dotnet_style_qualification_for_event=false:suggestion
+
+# Language keywords vs BCL types preferences
+dotnet_style_predefined_type_for_locals_parameters_members=true:suggestion
+dotnet_style_predefined_type_for_member_access=true:suggestion
+
+# Parentheses preferences
+dotnet_style_parentheses_in_arithmetic_binary_operators=always_for_clarity:silent
+dotnet_style_parentheses_in_relational_binary_operators=always_for_clarity:silent
+dotnet_style_parentheses_in_other_binary_operators=always_for_clarity:silent
+dotnet_style_parentheses_in_other_operators=never_if_unnecessary:silent
+
+# Modifier preferences
+dotnet_style_require_accessibility_modifiers=for_non_interface_members:silent
+dotnet_style_readonly_field=true:suggestion
+
+# Expression-level preferences
+dotnet_style_object_initializer=true:suggestion
+dotnet_style_collection_initializer=true:suggestion
+dotnet_style_explicit_tuple_names=true:suggestion
+dotnet_style_null_propagation=true:suggestion
+dotnet_style_coalesce_expression=true:suggestion
+dotnet_style_prefer_is_null_check_over_reference_equality_method=true:silent
+dotnet_style_prefer_inferred_tuple_names=true:suggestion
+dotnet_style_prefer_inferred_anonymous_type_member_names=true:suggestion
+dotnet_style_prefer_auto_properties=true:silent
+dotnet_style_prefer_conditional_expression_over_assignment=true:silent
+dotnet_style_prefer_conditional_expression_over_return=true:silent
+
+###############################
+# Naming Conventions          #
+###############################
+
+# Style Definitions
+dotnet_naming_style.pascal_case_style.capitalization=pascal_case
+dotnet_naming_style.camel_case_style.capitalization=camel_case
+
+# Use PascalCase for constant fields
+dotnet_naming_rule.constant_fields_should_be_pascal_case.severity=suggestion
+dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols=constant_fields
+dotnet_naming_rule.constant_fields_should_be_pascal_case.style=pascal_case_style
+dotnet_naming_symbols.constant_fields.applicable_kinds=field
+dotnet_naming_symbols.constant_fields.applicable_accessibilities=*
+dotnet_naming_symbols.constant_fields.required_modifiers=const
+
+# private members naming
+dotnet_naming_rule.private_members_with_underscore.symbols=private_members
+dotnet_naming_rule.private_members_with_underscore.style=underscore_prefix
+dotnet_naming_rule.private_members_with_underscore.severity=suggestion
+
+dotnet_naming_symbols.private_members.applicable_kinds=field
+dotnet_naming_symbols.private_members.applicable_accessibilities=private,private_protected
+dotnet_naming_symbols.private_members.required_modifiers=static,readonly
+
+dotnet_naming_style.underscore_prefix.capitalization=camel_case
+dotnet_naming_style.underscore_prefix.required_prefix=_
+dotnet_naming_style.underscore_prefix.required_suffix=
+dotnet_naming_style.underscore_prefix.word_separator=
+
+###############################
+# C# Code Style Rules         #
+###############################
+
+[*.cs]
+# see https://marketplace.visualstudio.com/items?itemName=PaulHarrington.EditorGuidelines
+guidelines=150
+
+simple_case_statement_style=line_break
+simple_embedded_statement_style=line_break
+place_simple_embedded_block_on_same_line=false
+
+# Modifier preferences
+csharp_preferred_modifier_order=public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:suggestion
+
+# var preferences
+csharp_for_built_in_types=use_var
+csharp_for_simple_types=use_var
+csharp_for_other_types=use_var
+csharp_style_var_for_built_in_types=true:silent
+csharp_style_var_when_type_is_apparent=true:silent
+csharp_style_var_elsewhere=true:silent
+
+# Expression-bodied members
+# Prefer method-like constructs to have a block body
+csharp_style_expression_bodied_methods=false:silent
+csharp_style_expression_bodied_constructors=false:silent
+csharp_style_expression_bodied_operators=false:silent
+# Prefer property-like constructs to have an expression-body
+csharp_style_expression_bodied_properties=true:silent
+csharp_style_expression_bodied_indexers=true:silent
+csharp_style_expression_bodied_accessors=true:silent
+# IDE0160 and IDE0161: namespace declarations https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161
+csharp_style_namespace_declarations = file_scoped:warning
+
+
+# .NET diagnostics customizations
+# block-scoped namespaces disabled
+dotnet_diagnostic.IDE0160.severity = none
+# file-scoped namespaces should be used
+dotnet_diagnostic.IDE0161.severity = warning
+
+# lower severity for CS1591:Missing XML comment for publicly visible type or member (https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs1591)
+dotnet_diagnostic.CS1591.severity = none
+
+# disable collection expression syntax hints
+dotnet_diagnostic.IDE0300.severity = none # remove once upgraded to .NET 8
+
+# disable collection initializers syntax hints
+dotnet_diagnostic.IDE0028.severity = none # remove once upgraded to .NET 8
+dotnet_style_collection_initializer = false # reset to "true" once upgraded to .NET 8 - see also https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0028?pivots=dotnet-7-0#options
+dotnet_style_prefer_collection_expression = never # reset to "when_types_exactly_match" once upgraded to .NET 8 - see also https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0300#dotnet_style_prefer_collection_expression
+
+# Pattern-matching preferences
+csharp_style_pattern_matching_over_is_with_cast_check=true:suggestion
+csharp_style_pattern_matching_over_as_with_null_check=true:suggestion
+
+# Null-checking preferences
+csharp_style_throw_expression=true:suggestion
+csharp_style_conditional_delegate_call=true:suggestion
+
+# Expression-level preferences
+csharp_prefer_braces=true:suggestion
+csharp_style_deconstructed_variable_declaration=true:suggestion
+csharp_prefer_simple_default_expression=true:suggestion
+csharp_style_pattern_local_over_anonymous_function=true:suggestion
+csharp_style_inlined_variable_declaration=true:suggestion
+
+###############################
+# C# Formatting Rules         #
+###############################
+
+# Newline settings
+csharp_new_line_before_open_brace=all
+csharp_new_line_before_else=true
+csharp_new_line_before_catch=true
+csharp_new_line_before_finally=true
+csharp_new_line_before_members_in_object_initializers=true
+csharp_new_line_before_members_in_anonymous_types=true
+csharp_new_line_between_query_expression_clauses=true
+
+# Indentation preferences
+csharp_indent_case_contents=true
+csharp_indent_switch_labels=true
+csharp_indent_labels=flush_left
+
+# Braces settings
+csharp_braces_redundant=false
+csharp_empty_block_style=together_same_line
+csharp_invocable_declaration_braces=next_line
+csharp_other_braces=next_line
+csharp_anonymous_method_declaration_braces=end_of_line
+csharp_accessor_owner_declaration_braces=end_of_line
+csharp_accessor_declaration_braces=end_of_line
+csharp_case_block_braces=end_of_line
+csharp_initializer_braces=end_of_line
+csharp_allow_comment_after_lbrace=false
+
+# Multiline constructs settings
+csharp_align_linq_query=false
+csharp_align_multiline_argument=false
+csharp_align_multiline_extends_list=false
+csharp_align_multiline_for_stmt=false
+csharp_align_multiline_parameter=false
+csharp_align_multiple_declaration=false
+csharp_align_multline_type_parameter_list=false
+
+# Blank lines settings
+blank_lines_around_type=2
+blank_lines_around_single_line_type=1
+blank_lines_around_auto_property=1
+blank_lines_around_single_line_auto_property=1
+blank_lines_around_property=1
+blank_lines_around_single_line_property=1
+blank_lines_around_field=1
+blank_lines_around_single_line_field=1
+blank_lines_around_accessor=1
+blank_lines_around_single_line_accessor=1
+blank_lines_around_invocable=2
+blank_lines_around_single_line_invocable=2
+keep_blank_lines_in_code=2
+keep_blank_lines_in_declarations=1
+
+# Tabs, indents, aligments settings
+csharp_indent_nested_for_stmt=true
+csharp_indent_nested_foreach_stmt=true
+csharp_indent_nested_lock_stmt=true
+csharp_indent_nested_usings_stmt=true
+csharp_indent_nested_while_stmt=true
+csharp_indent_statement_pars=outside_and_inside
+csharp_stick_comment=false
+
+# Line breaks settings
+csharp_keep_existing_embedded_arrangement=false
+csharp_keep_existing_expr_member_arrangement=false
+csharp_keep_existing_initializer_arrangement=true
+csharp_keep_user_linebreaks=false
+csharp_max_attribute_length_for_same_line=50
+csharp_place_simple_case_statement_on_same_line=never
+csharp_place_constructor_initializer_on_same_line=false
+csharp_place_simple_accessorholder_on_single_line=true
+csharp_place_simple_embedded_statement_on_same_line=false:never
+csharp_place_simple_method_on_single_line=true
+csharp_wrap_before_binary_opsign=true
+csharp_wrap_before_first_type_parameter_constraint=true
+csharp_wrap_chained_binary_expressions=chop_if_long
+csharp_wrap_chained_method_calls=chop_if_long
+csharp_wrap_extends_list_style=chop_if_long
+csharp_wrap_parameters_style=chop_if_long
+csharp_place_type_constraints_on_same_line=false
+csharp_wrap_before_first_type_parameter_constraint=true
+csharp_wrap_multiple_type_parameter_constraints_style=chop_always
+
+# Wrapping preferences
+csharp_preserve_single_line_statements=true
+csharp_preserve_single_line_blocks=true
+
+# Attribute settings
+csharp_keep_existing_attribute_arrangement=false
+csharp_force_attribute_style=separate
+csharp_place_attribute_on_same_line=never
+csharp_place_type_attribute_on_same_line=never
+csharp_place_accessor_attribute_on_same_line=never
+csharp_place_accessorholder_attribute_on_same_line=never
+csharp_place_field_attribute_on_same_line=never
+csharp_place_method_attribute_on_same_line=never
+csharp_place_record_field_attribute_on_same_line=always
+
+# Arrangement of Expression Bodied Members
+csharp_place_expr_method_on_single_line=if_owner_is_single_line
+
+# Code style
+csharp_constructor_or_destructor_body=block_body
+csharp_method_or_operator_body=block_body
+csharp_local_function_body=expression_body
+csharp_accessor_owner_body=expression_body
+
+# Space preferences
+csharp_space_after_cast=false
+csharp_space_after_keywords_in_control_flow_statements=true
+csharp_space_between_method_call_parameter_list_parentheses=false
+csharp_space_between_method_declaration_parameter_list_parentheses=false
+csharp_space_between_parentheses=false
+csharp_space_before_colon_in_inheritance_clause=true
+csharp_space_after_colon_in_inheritance_clause=true
+csharp_space_around_binary_operators=before_and_after
+csharp_space_between_method_declaration_empty_parameter_list_parentheses=false
+csharp_space_between_method_call_name_and_opening_parenthesis=false
+csharp_space_between_method_call_empty_parameter_list_parentheses=false
+csharp_space_after_operator_keyword=false
+csharp_space_before_catch_parentheses=true
+csharp_space_before_fixed_parentheses=true
+csharp_space_before_lock_parentheses=true
+csharp_space_before_switch_parentheses=true
+csharp_space_before_using_parentheses=true
+csharp_space_within_empty_braces=false
+
+# ReSharper inspection severities
+resharper_arrange_object_creation_when_type_evident_highlighting = suggestion
+resharper_arrange_object_creation_when_type_not_evident_highlighting = warning
+resharper_arrange_redundant_parentheses_highlighting = suggestion
+resharper_arrange_static_member_qualifier_highlighting = suggestion
+resharper_arrange_this_qualifier_highlighting = suggestion
+resharper_arrange_type_member_modifiers_highlighting = suggestion
+resharper_built_in_type_reference_style_for_member_access_highlighting = suggestion
+resharper_built_in_type_reference_style_highlighting = suggestion
+resharper_check_namespace_highlighting = warning
+resharper_convert_to_using_declaration_highlighting = warning
+resharper_css_not_resolved_highlighting = suggestion
+resharper_field_can_be_made_read_only_local_highlighting = suggestion
+resharper_merge_into_logical_pattern_highlighting = suggestion
+resharper_merge_into_pattern_highlighting = suggestion
+resharper_method_has_async_overload_highlighting = warning
+resharper_partial_type_with_single_part_highlighting = suggestion
+resharper_redundant_base_qualifier_highlighting = warning
+resharper_redundant_cast_highlighting = warning
+resharper_redundant_empty_object_creation_argument_list_highlighting = warning
+resharper_redundant_empty_object_or_collection_initializer_highlighting = warning
+resharper_redundant_name_qualifier_highlighting = warning
+resharper_redundant_suppress_nullable_warning_expression_highlighting = warning
+resharper_redundant_using_directive_highlighting = warning
+resharper_redundant_verbatim_string_prefix_highlighting = warning
+resharper_replace_substring_with_range_indexer_highlighting = suggestion
+resharper_suggest_var_or_type_built_in_types_highlighting = suggestion
+resharper_suggest_var_or_type_elsewhere_highlighting = suggestion
+resharper_suggest_var_or_type_simple_types_highlighting = suggestion
+resharper_unnecessary_whitespace_highlighting = warning
+resharper_use_await_using_highlighting = warning
+resharper_use_deconstruction_highlighting = warning
+resharper_use_collection_expression_highlighting = none # reset to suggestion once upgraded to .NET 8
+resharper_redundant_array_creation_expression_highlighting = none # reset to suggestion once upgraded to .NET 8
+resharper_method_has_async_overload_with_cancellation_highlighting = warning
+resharper_method_has_async_overload_highlighting = warning
+resharper_method_supports_cancellation_highlighting = warning
+resharper_convert_if_statement_to_null_coalescing_assignment_highlighting = suggestion
+resharper_convert_if_statement_to_null_coalescing_expression_highlighting = suggestion
+resharper_join_null_check_with_usage_highlighting = suggestion
+
+
+[*.{ts,js}]
+align_multiline_parameter=true
+align_multiple_declaration=true
+control_statements_braces=next_line
+curly_bracket_next_line=true
+empty_block_style=together
+extra_spaces=leave_all
+function_braces=next_line
+function_in_invocation_braces=next_line
+indent_brace_style=Horstmann
+indent_size=4
+indent_switch_labels=true
+keep_blank_lines_between_declarations=4
+keep_blank_lines_in_code=4
+new_line_before_catch=true
+new_line_before_else=true
+new_line_before_finally=true
+new_line_before_while=true
+space_after_colon_in_type_annotation=true
+space_around_pipe_or_amper_in_type_usage=true
+space_before_colon_in_type_annotation=true
+space_before_property_colon=true
+space_within_object_literal_braces=false
+spaces_around_brackets=true
+spaces_around_operators=true
+termination_style=ensure_semicolon
+types_braces=next_line
+
+
+# disable specific formatting for generated migrations
+[**/Migrations/*.{cs}]
+# IDE0160 and IDE0161: namespace declarations https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161
+csharp_style_namespace_declarations = block_scoped:suggestion
+# block-scoped namespaces muted
+dotnet_diagnostic.IDE0160.severity = none
+# file-scoped namespaces muted
+dotnet_diagnostic.IDE0161.severity = none

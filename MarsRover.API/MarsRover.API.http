@@ -1,0 +1,38 @@
+@MarsRover.API_HostAddress = https://localhost:7011
+
+// see console output for a map drawing after invoking an endpoint
+
+GET {{MarsRover.API_HostAddress}}/mission/status/
+Accept: application/json
+
+###
+
+POST {{MarsRover.API_HostAddress}}/mission/land/at/random
+Accept: application/json
+
+###
+
+
+POST {{MarsRover.API_HostAddress}}/mission/land/at
+Content-Type: application/json
+
+{
+  "x": 0,
+  "y": 0,
+  "direction": 1
+}
+
+###
+
+POST {{MarsRover.API_HostAddress}}/mission/abort
+
+###
+
+POST {{MarsRover.API_HostAddress}}/mission/process
+Content-Type: application/json
+
+[
+  "f", "f", "f", "l", "f", "f"
+]
+
+###
